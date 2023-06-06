@@ -69,7 +69,7 @@ abstract class AbstractActionMode(private val toolbar: Toolbar,
 
     fun isActive() = callback != null
 
-    abstract fun show(toolbar: Toolbar)
+    protected abstract fun show(toolbar: Toolbar)
 
     @SuppressLint("RestrictedApi")
     @JvmOverloads
@@ -89,7 +89,7 @@ abstract class AbstractActionMode(private val toolbar: Toolbar,
         menuInflater.inflate(menuRes, menu)
     }
 
-    abstract fun hide(toolbar: Toolbar)
+    protected abstract fun hide(toolbar: Toolbar)
 
     fun finish() {
         if (!isActive()) {
