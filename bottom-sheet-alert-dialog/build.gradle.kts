@@ -7,6 +7,7 @@ ext {
     set("artifact_id", "bottom-sheet-alert-dialog")
     set("version_name", "1.0")
     set("description_str", "Create bottom sheets with title and buttons")
+    set("is_android_library", true)
 }
 
 apply(from = "../publish.gradle")

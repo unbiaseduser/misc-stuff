@@ -7,6 +7,7 @@ ext {
     set("artifact_id", "custom-action-mode")
     set("version_name", "1.0")
     set("description_str", "Toolbar wrapper that simulates the vanilla ActionMode")
+    set("is_android_library", true)
 }
 
 apply(from = "../publish.gradle")

@@ -1,38 +1,16 @@
 plugins {
     id("java-library")
     kotlin("jvm")
-    id("maven-publish")
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("lib") {
-            groupId = "com.sixtyninefourtwenty.misc-stuff"
-            artifactId = "conflict-resolver"
-            version = "1.0"
-            from(components["java"])
-
-            pom {
-                name.set("conflict-resolver")
-                description.set("Helper class to help resolve dataset conflicts in apps")
-                licenses {
-                    license {
-                        name.set("The MIT License")
-                        url.set("https://opensource.org/licenses/MIT")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("unbiaseduser")
-                        name.set("Dang Quang Trung")
-                        email.set("quangtrung02hn16@gmail.com")
-                        url.set("https://github.com/unbiaseduser")
-                    }
-                }
-            }
-        }
-    }
+ext {
+    set("artifact_id", "conflict-resolver")
+    set("version_name", "1.0")
+    set("description_str", "Helper class to help resolve dataset conflicts in apps")
+    set("is_android_library", false)
 }
+
+apply(from = "../publish.gradle")
 
 kotlin {
     jvmToolchain(8)

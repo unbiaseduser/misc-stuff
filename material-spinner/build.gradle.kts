@@ -7,6 +7,7 @@ ext {
     set("artifact_id", "material-spinner")
     set("version_name", "1.0")
     set("description_str", "Convenience wrapper for Google Material text field with exposed dropdown menu")
+    set("is_android_library", true)
 }
 
 apply(from = "../publish.gradle")
