@@ -1,0 +1,33 @@
+apply plugin: 'maven-publish'
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId 'com.sixtyninefourtwenty.misc-stuff'
+                artifactId artifact_id
+                version version_name
+                from components.release
+
+                pom {
+                    name = artifact_id
+                    description = description_str
+                    licenses {
+                        license {
+                            name = 'The MIT License'
+                            url = 'https://opensource.org/licenses/MIT'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'unbiaseduser'
+                            name = 'Dang Quang Trung'
+                            email = 'quangtrung02hn16@gmail.com'
+                            url = 'https://github.com/unbiaseduser'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
