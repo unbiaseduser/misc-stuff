@@ -38,7 +38,7 @@ class MaterialSpinner @JvmOverloads constructor(
                     if (value < 0 || value >= adapter.count) {
                         throw IndexOutOfBoundsException("Position out of bounds of dataset")
                     }
-                    binding.autoCompleteTextView.setText(adapter.getItem(value).toString())
+                    binding.autoCompleteTextView.setText(adapter.getItem(value).toString(), false)
                 }
             }
             itemSelectedListener?.accept(value)
