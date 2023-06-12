@@ -15,7 +15,7 @@ sealed class BaseDialogBuilder<T : BaseDialogBuilder<T>>(view: View,
     private val shouldBeFullScreen: Boolean
     protected val ui: BottomSheetAlertDialogCommon
     protected abstract val dialog: BottomSheetDialog
-    abstract fun self(): T
+    protected abstract fun self(): T
 
     fun setTitle(@StringRes titleRes: Int) = self().apply { ui.setTitle(titleRes) }
 
