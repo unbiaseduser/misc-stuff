@@ -33,7 +33,7 @@ class ResultCompat<out T> private constructor(private val result: Result<T>) {
         @JvmStatic
         fun <T, R> runCatching(input: T, block: Function<in T, out R>) = ResultCompat(input.runCatching(block::apply))
         @JvmStatic
-        fun <R, T : R> getOrElse(existing: ResultCompat<T>, onFailure: Function<Throwable, out R>) = existing.result.getOrElse(onFailure::apply)
+        fun <R, T : R> getOrElse(existing: ResultCompat<T>, onFailure: Function<in Throwable, out R>) = existing.result.getOrElse(onFailure::apply)
         @JvmStatic
         fun <R, T : R> getOrDefault(existing: ResultCompat<T>, defaultValue: R) = existing.result.getOrDefault(defaultValue)
         @JvmStatic
