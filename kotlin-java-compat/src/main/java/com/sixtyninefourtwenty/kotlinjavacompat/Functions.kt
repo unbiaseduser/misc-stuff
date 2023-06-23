@@ -15,7 +15,7 @@ fun interface Function0Compat : () -> Unit {
 /**
  * A functional interface that can be used in place of Kotlin's `(T) -> Unit` to get rid of the awkward `return Unit.INSTANCE` return statement.
  */
-fun interface Function1Compat<T> : Function1<T, Unit> {
+fun interface Function1Compat<in T> : Function1<T, Unit> {
     override fun invoke(t: T) {
         invokeCustom(t)
     }
@@ -26,7 +26,7 @@ fun interface Function1Compat<T> : Function1<T, Unit> {
 /**
  * A functional interface that can be used in place of Kotlin's `(T, U) -> Unit` to get rid of the awkward `return Unit.INSTANCE` return statement.
  */
-fun interface Function2Compat<T, U> : Function2<T, U, Unit> {
+fun interface Function2Compat<in T, in U> : Function2<T, U, Unit> {
     override fun invoke(t: T, u: U) {
         invokeCustom(t, u)
     }
