@@ -57,7 +57,13 @@ class ThemingPreferenceFragment : PreferenceFragmentCompat() {
                     requireActivity().recreate()
                     true
                 }
-                summaryProvider = PredefinedColorPickerPreference.SUMMARY_PROVIDER
+
+                if (prefs.md3 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    isEnabled = false
+                    summary = getString(R.string.using_android_12_dynamic_colors)
+                } else {
+                    summaryProvider = PredefinedColorPickerPreference.SUMMARY_PROVIDER
+                }
             })
         }
     }
