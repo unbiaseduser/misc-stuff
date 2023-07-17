@@ -2,18 +2,21 @@ package com.sixtyninefourtwenty.theming.preferences
 
 import android.os.Build
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.sixtyninefourtwenty.custompreferences.AbstractCustomDialogPreference
 import com.sixtyninefourtwenty.custompreferences.PredefinedColorPickerPreference
+import com.sixtyninefourtwenty.theming.LightDarkMode
 import com.sixtyninefourtwenty.theming.R
 
 class ThemingPreferenceFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        preferenceManager.preferenceDataStore = ThemingPreferences(requireContext())
+        val prefs = ThemingPreferences(requireContext())
+        preferenceManager.preferenceDataStore = prefs
         preferenceScreen = preferenceManager.createPreferenceScreen(requireContext()).apply {
             addPreference(SwitchPreferenceCompat(requireContext()).apply {
                 key = ThemingPreferences.MD3_KEY
@@ -31,6 +34,12 @@ class ThemingPreferenceFragment : PreferenceFragmentCompat() {
                 dialogTitle = getString(R.string.theme)
                 entries = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) requireContext().resources.getStringArray(R.array.themes_preference_entries) else requireContext().resources.getStringArray(R.array.themes_preference_entries_p)
                 entryValues = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) requireContext().resources.getStringArray(R.array.themes_preference_entry_values) else requireContext().resources.getStringArray(R.array.themes_preference_entry_values_p)
+                setIcon(when (prefs.lightDarkMode) {
+                    LightDarkMode.LIGHT -> R.drawable.light_mode
+                    LightDarkMode.DARK -> R.drawable.dark_mode
+                    LightDarkMode.BATTERY -> R.drawable.battery_saver
+                    LightDarkMode.SYSTEM -> R.drawable.android
+                })
                 setDefaultValue(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) "system" else "light")
                 setOnPreferenceChangeListener { _, _ ->
                     requireActivity().recreate()
@@ -41,6 +50,7 @@ class ThemingPreferenceFragment : PreferenceFragmentCompat() {
             addPreference(PredefinedColorPickerPreference(requireContext()).apply {
                 key = ThemingPreferences.PRIMARY_COLOR_KEY
                 title = getString(R.string.primary_color)
+                setIcon(R.drawable.palette)
                 setDefaultValue("#3385ff")
                 setAvailableColorsArrayRes(R.array.theme_color_preference_available_colors)
                 setOnPreferenceChangeListener { _, _ ->
