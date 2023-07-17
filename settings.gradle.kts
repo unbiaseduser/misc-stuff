@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://jitpack.io")
     }
 }
 
@@ -20,3 +21,5 @@ include(":material-spinner")
 include(":conflict-resolver")
 include(":kotlin-java-compat")
 include(":base-fragments")
+include(":theming")
+include(":custom-preferences")
