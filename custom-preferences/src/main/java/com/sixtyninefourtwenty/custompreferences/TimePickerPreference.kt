@@ -22,7 +22,7 @@ class TimePickerPreference @JvmOverloads constructor(
 
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.TimePickerPreference, defStyleAttr, defStyleRes)
-        if (a.getBoolean(R.styleable.TimePickerPreference_useSimpleSummaryProvider, false)) {
+        if (a.getBoolean(R.styleable.TimePickerPreference_tpp_useSimpleSummaryProvider, false)) {
             summaryProvider = mySummaryProvider
         }
         a.recycle()

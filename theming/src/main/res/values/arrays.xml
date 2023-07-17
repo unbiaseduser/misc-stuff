@@ -2,12 +2,12 @@
 <resources>
 
     <integer-array name="theme_color_preference_available_colors">
-        <item>@color/m2ColorPrimary_blue</item>
-        <item>@color/m2ColorPrimary_red</item>
-        <item>@color/m2ColorPrimary_green</item>
-        <item>@color/m2ColorPrimary_purple</item>
-        <item>@color/m2ColorPrimary_orange</item>
-        <item>@color/m2ColorPrimary_pink</item>
+        <item>@color/blue_fixed</item>
+        <item>@color/red_fixed</item>
+        <item>@color/green_fixed</item>
+        <item>@color/purple_fixed</item>
+        <item>@color/orange_fixed</item>
+        <item>@color/pink_fixed</item>
     </integer-array>
 
     <string-array name="themes_preference_entries" translatable="false">

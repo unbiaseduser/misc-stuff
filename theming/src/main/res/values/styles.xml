@@ -239,6 +239,8 @@
         <item name="themeDependantSuggestionChipStyle">@style/Widget.Material3.Chip.Suggestion</item>
         <item name="themeDependantAssistChipStyle">@style/Widget.Material3.Chip.Assist</item>
 
+        <item name="android:textAppearanceListItem">@style/TextAppearance.Preference.Title</item>
+        <item name="android:textAppearanceListItemSecondary">@style/TextAppearance.Preference.ColorSecondary</item>
         <item name="alertDialogTheme">@style/AlertDialogTheme.Material3</item>
         <item name="preferenceStyle">@style/Preference.Material3</item>
         <item name="checkBoxPreferenceStyle">@style/Preference.CheckBoxPreference.Material3</item>
@@ -352,6 +354,14 @@
     <style name="Preference.SwitchPreferenceCompat.Material3" parent="Preference.SwitchPreferenceCompat.Material">
         <item name="android:layout">@layout/m3_preference</item>
         <item name="android:widgetLayout">@layout/m3_preference_widget_material_switch</item>
+    </style>
+
+    <style name="TextAppearance.Preference.Title" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">18sp</item>
+    </style>
+    
+    <style name="TextAppearance.Preference.ColorSecondary" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
 </resources>

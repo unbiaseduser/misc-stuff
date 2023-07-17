@@ -6,8 +6,8 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
+import com.sixtyninefourtwenty.custompreferences.AbstractCustomDialogPreference
 import com.sixtyninefourtwenty.custompreferences.PredefinedColorPickerPreference
-import com.sixtyninefourtwenty.custompreferences.handleDisplayPreferenceDialog
 import com.sixtyninefourtwenty.theming.R
 
 class ThemingPreferenceFragment : PreferenceFragmentCompat() {
@@ -28,6 +28,7 @@ class ThemingPreferenceFragment : PreferenceFragmentCompat() {
             addPreference(ListPreference(requireContext()).apply {
                 key = ThemingPreferences.LIGHT_DARK_MODE_KEY
                 title = getString(R.string.theme)
+                dialogTitle = getString(R.string.theme)
                 entries = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) requireContext().resources.getStringArray(R.array.themes_preference_entries) else requireContext().resources.getStringArray(R.array.themes_preference_entries_p)
                 entryValues = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) requireContext().resources.getStringArray(R.array.themes_preference_entry_values) else requireContext().resources.getStringArray(R.array.themes_preference_entry_values_p)
                 setDefaultValue(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) "system" else "light")
@@ -52,7 +53,11 @@ class ThemingPreferenceFragment : PreferenceFragmentCompat() {
     }
 
     override fun onDisplayPreferenceDialog(preference: Preference) {
-        handleDisplayPreferenceDialog(preference)
+        if (preference is AbstractCustomDialogPreference) {
+            preference.displayDialog(this)
+        } else {
+            super.onDisplayPreferenceDialog(preference)
+        }
     }
 
 }

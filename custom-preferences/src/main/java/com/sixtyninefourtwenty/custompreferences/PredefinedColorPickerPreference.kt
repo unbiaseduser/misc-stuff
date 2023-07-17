@@ -30,6 +30,9 @@ class PredefinedColorPickerPreference @JvmOverloads constructor(
     init {
         val typedArray = context.obtainStyledAttributes(R.styleable.PredefinedColorPickerPreference)
         availableColors = context.resources.getIntArray(typedArray.getResourceId(R.styleable.PredefinedColorPickerPreference_colors, R.array.color_picker_default_colors))
+        if (typedArray.getBoolean(R.styleable.PredefinedColorPickerPreference_pcpp_useSimpleSummaryProvider, false)) {
+            summaryProvider = SUMMARY_PROVIDER
+        }
         typedArray.recycle()
         widgetLayoutResource = R.layout.preference_widget_color_swatch
     }
@@ -42,6 +45,12 @@ class PredefinedColorPickerPreference @JvmOverloads constructor(
     override fun onClick() {
         super.onClick()
         MaterialColorPickerDialog.Builder(context)
+            .also {
+                val prefTitle = title
+                if (prefTitle != null) {
+                    it.setTitle(prefTitle.toString())
+                }
+            }
             .setColorRes(availableColors)
             .setDefaultColor(currentColor)
             .setColorListener { color, _ ->
