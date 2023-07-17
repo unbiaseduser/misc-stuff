@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <integer-array name="theme_color_preference_available_colors">
+        <item>@color/m2ColorPrimary_blue</item>
+        <item>@color/m2ColorPrimary_red</item>
+        <item>@color/m2ColorPrimary_green</item>
+        <item>@color/m2ColorPrimary_purple</item>
+        <item>@color/m2ColorPrimary_orange</item>
+        <item>@color/m2ColorPrimary_pink</item>
+    </integer-array>
+
     <string-array name="themes_preference_entries" translatable="false">
         <item>@string/light</item>
         <item>@string/dark</item>

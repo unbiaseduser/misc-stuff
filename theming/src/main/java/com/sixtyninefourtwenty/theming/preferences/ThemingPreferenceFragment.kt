@@ -41,6 +41,7 @@ class ThemingPreferenceFragment : PreferenceFragmentCompat() {
                 key = ThemingPreferences.PRIMARY_COLOR_KEY
                 title = getString(R.string.primary_color)
                 setDefaultValue("#3385ff")
+                setAvailableColorsArrayRes(R.array.theme_color_preference_available_colors)
                 setOnPreferenceChangeListener { _, _ ->
                     requireActivity().recreate()
                     true

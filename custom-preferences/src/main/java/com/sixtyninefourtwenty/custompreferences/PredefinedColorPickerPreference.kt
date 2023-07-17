@@ -9,6 +9,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.widget.ImageView
+import androidx.annotation.ArrayRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColorInt
 import androidx.preference.Preference
@@ -24,13 +25,17 @@ class PredefinedColorPickerPreference @JvmOverloads constructor(
 
     private var colorWidget: ImageView? = null
     private var currentColor: Int = Color.BLACK
-    private val availableColors: IntArray
+    private var availableColors: IntArray
 
     init {
         val typedArray = context.obtainStyledAttributes(R.styleable.PredefinedColorPickerPreference)
         availableColors = context.resources.getIntArray(typedArray.getResourceId(R.styleable.PredefinedColorPickerPreference_colors, R.array.color_picker_default_colors))
         typedArray.recycle()
         widgetLayoutResource = R.layout.preference_widget_color_swatch
+    }
+
+    fun setAvailableColorsArrayRes(@ArrayRes arrayRes: Int) {
+        availableColors = context.resources.getIntArray(arrayRes)
     }
 
     @SuppressLint("ResourceType")
