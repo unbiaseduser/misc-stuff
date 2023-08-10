@@ -7,6 +7,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.text.format.DateFormat
 import android.util.AttributeSet
+import androidx.core.os.ParcelCompat
 import androidx.fragment.app.DialogFragment
 import androidx.preference.Preference.SummaryProvider
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -85,7 +86,7 @@ class TimePickerPreference @JvmOverloads constructor(
     private class SavedState : BaseSavedState {
 
         constructor(source: Parcel) : super(source) {
-            time = source.readSerializable() as LocalTime?
+            time = ParcelCompat.readSerializable(source, null, LocalTime::class.java)
         }
 
         constructor(superState: Parcelable?) : super(superState)
