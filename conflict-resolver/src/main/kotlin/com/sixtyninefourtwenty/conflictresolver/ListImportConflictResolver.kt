@@ -5,7 +5,7 @@ import java.util.function.BinaryOperator
 import java.util.function.Consumer
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-class ListImportConflictResolver<T> @JvmOverloads constructor(
+class ListImportConflictResolver<out T> @JvmOverloads constructor(
     existingList: List<T>,
     importedList: List<T>,
     private val conflictPredicate: BiPredicate<in T, in T>,
