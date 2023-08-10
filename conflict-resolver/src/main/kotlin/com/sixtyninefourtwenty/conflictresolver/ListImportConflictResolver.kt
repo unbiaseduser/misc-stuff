@@ -5,8 +5,8 @@ import java.util.function.Consumer
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 class ListImportConflictResolver<T>(
-    existingList: Collection<T>,
-    importedList: Collection<T>,
+    existingList: List<T>,
+    importedList: List<T>,
     private val conflictPredicate: BiPredicate<T, T>,
     private val conflictResolution: Consumer<ConflictResolution<T>>,
     private val onResolved: Consumer<List<T>>
