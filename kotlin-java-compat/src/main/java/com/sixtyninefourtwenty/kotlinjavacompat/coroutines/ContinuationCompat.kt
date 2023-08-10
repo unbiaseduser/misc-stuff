@@ -6,14 +6,24 @@ import kotlin.coroutines.Continuation
 import kotlin.coroutines.CoroutineContext
 
 @Suppress("unused")
-class ContinuationCompat<T> @JvmOverloads constructor(
-    private val scope: CoroutineScope,
-    private val onSuccess: Consumer<T>? = null,
+class ContinuationCompat<in T> @JvmOverloads constructor(
+    private val coroutineContext: CoroutineContext,
+    private val onSuccess: Consumer<in T>? = null,
     private val onFailure: Consumer<Exception>? = null
 ) : Continuation<T> {
 
+    @JvmOverloads constructor(
+        scope: CoroutineScope,
+        onSuccess: Consumer<in T>? = null,
+        onFailure: Consumer<Exception>? = null
+    ) : this(
+        scope.coroutineContext,
+        onSuccess,
+        onFailure
+    )
+
     override val context: CoroutineContext
-        get() = scope.coroutineContext
+        get() = coroutineContext
 
     override fun resumeWith(result: Result<T>) {
         result.onSuccess {
