@@ -2,17 +2,14 @@ package com.sixtyninefourtwenty.theming.preferences
 
 import android.os.Build
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import androidx.preference.ListPreference
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
-import com.sixtyninefourtwenty.custompreferences.AbstractCustomDialogPreference
 import com.sixtyninefourtwenty.custompreferences.PredefinedColorPickerPreference
+import com.sixtyninefourtwenty.custompreferences.PreferenceFragmentCompatAccommodateCustomDialogPreferences
 import com.sixtyninefourtwenty.theming.LightDarkMode
 import com.sixtyninefourtwenty.theming.R
 
-class ThemingPreferenceFragment : PreferenceFragmentCompat() {
+class ThemingPreferenceFragment : PreferenceFragmentCompatAccommodateCustomDialogPreferences() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         val prefs = ThemingPreferences(requireContext())
@@ -65,14 +62,6 @@ class ThemingPreferenceFragment : PreferenceFragmentCompat() {
                     summaryProvider = PredefinedColorPickerPreference.SUMMARY_PROVIDER
                 }
             })
-        }
-    }
-
-    override fun onDisplayPreferenceDialog(preference: Preference) {
-        if (preference is AbstractCustomDialogPreference) {
-            preference.displayDialog(this)
-        } else {
-            super.onDisplayPreferenceDialog(preference)
         }
     }
 
