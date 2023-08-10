@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 
-internal enum class LightDarkMode(private val androidInt: Int) {
+enum class LightDarkMode(private val androidInt: Int) {
     LIGHT(AppCompatDelegate.MODE_NIGHT_NO),
     DARK(AppCompatDelegate.MODE_NIGHT_YES),
     BATTERY(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY),
