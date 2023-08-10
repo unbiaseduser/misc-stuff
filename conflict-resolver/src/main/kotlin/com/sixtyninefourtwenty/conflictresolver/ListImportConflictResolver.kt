@@ -1,14 +1,16 @@
 package com.sixtyninefourtwenty.conflictresolver
 
 import java.util.function.BiPredicate
+import java.util.function.BinaryOperator
 import java.util.function.Consumer
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-class ListImportConflictResolver<out T>(
+class ListImportConflictResolver<out T> @JvmOverloads constructor(
     existingList: List<T>,
     importedList: List<T>,
     private val conflictPredicate: BiPredicate<in T, in T>,
     private val conflictResolution: Consumer<in ConflictResolution<T>>,
+    private val resultCombiner: BinaryOperator<List<T>> = BinaryOperator { first, second -> first + second },
     private val onResolved: Consumer<in List<T>>
 ) {
     private val existingList = ArrayList(existingList)
@@ -24,7 +26,7 @@ class ListImportConflictResolver<out T>(
                 }
             }
         }
-        onResolved.accept(existingList + importedList)
+        onResolved.accept(resultCombiner.apply(existingList, importedList))
     }
 
     class ConflictResolution<T> internal constructor(
