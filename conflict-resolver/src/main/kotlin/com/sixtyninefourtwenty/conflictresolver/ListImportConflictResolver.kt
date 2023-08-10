@@ -4,12 +4,12 @@ import java.util.function.BiPredicate
 import java.util.function.Consumer
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-class ListImportConflictResolver<T>(
+class ListImportConflictResolver<out T>(
     existingList: List<T>,
     importedList: List<T>,
-    private val conflictPredicate: BiPredicate<T, T>,
-    private val conflictResolution: Consumer<ConflictResolution<T>>,
-    private val onResolved: Consumer<List<T>>
+    private val conflictPredicate: BiPredicate<in T, in T>,
+    private val conflictResolution: Consumer<in ConflictResolution<T>>,
+    private val onResolved: Consumer<in List<T>>
 ) {
     private val existingList = ArrayList(existingList)
     private val importedList = ArrayList(importedList)
