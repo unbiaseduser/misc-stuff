@@ -10,6 +10,27 @@ fun interface Function0Compat : () -> Unit {
     }
 
     fun invokeCustom()
+
+    companion object {
+        /**
+         * Convenience method that allows to avoid casting your lambda expression.
+         *
+         * Usage: Just replace occurrences of
+         *
+         * ```
+         * method((Function0Compat) () -> doStuff());
+         * ```
+         *
+         * with
+         *
+         * ```
+         * // shorten() is static imported
+         * method(shorten(() -> doStuff()));
+         * ```
+         */
+        @JvmStatic
+        fun shorten(block: Function0Compat): () -> Unit = block
+    }
 }
 
 /**
@@ -21,6 +42,27 @@ fun interface Function1Compat<in T> : Function1<T, Unit> {
     }
 
     fun invokeCustom(t: T)
+
+    companion object {
+        /**
+         * Convenience method that allows to avoid casting your lambda expression.
+         *
+         * Usage: Just replace occurrences of
+         *
+         * ```
+         * method((Function1Compat<MyClass>) myObj -> doStuff(myObj));
+         * ```
+         *
+         * with
+         *
+         * ```
+         * // shorten() is static imported
+         * method(shorten(myObj -> doStuff(myObj)));
+         * ```
+         */
+        @JvmStatic
+        fun <T> shorten(block: Function1Compat<T>): (T) -> Unit = block
+    }
 }
 
 /**
@@ -32,4 +74,25 @@ fun interface Function2Compat<in T, in U> : Function2<T, U, Unit> {
     }
 
     fun invokeCustom(t: T, u: U)
+
+    companion object {
+        /**
+         * Convenience method that allows to avoid casting your lambda expression.
+         *
+         * Usage: Just replace occurrences of
+         *
+         * ```
+         * method((Function2Compat<MyClassOne, MyClassTwo>) (myObjOne, myObjTwo) -> doStuff(myObjOne, myObjTwo));
+         * ```
+         *
+         * with
+         *
+         * ```
+         * // shorten() is static imported
+         * method(shorten((myObjOne, myObjTwo) -> doStuff(myObjOne, myObjTwo)));
+         * ```
+         */
+        @JvmStatic
+        fun <T, U> shorten(block: Function2Compat<T, U>): (T, U) -> Unit = block
+    }
 }
