@@ -17,3 +17,7 @@ fun AssetManager.createDrawableFromAsset(path: String) = open(path).use { Drawab
 @JvmOverloads
 fun <R> AssetManager.readTextFileLines(path: String, charset: Charset = Charsets.UTF_8, block: (Stream<String>) -> R) =
     open(path).bufferedReader(charset).use { block(it.lines()) }
+
+@JvmOverloads
+fun AssetManager.readFirstFileLine(path: String, charset: Charset = Charsets.UTF_8): String? =
+    open(path).bufferedReader(charset).use { it.readLine() }
