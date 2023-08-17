@@ -16,19 +16,23 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 import com.github.dhaval2404.colorpicker.MaterialColorPickerDialog
 
-class PredefinedColorPickerPreference @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = androidx.preference.R.attr.preferenceStyle,
-    defStyleRes: Int = 0
-) : Preference(context, attrs, defStyleAttr, defStyleRes) {
+@Suppress("unused")
+class PredefinedColorPickerPreference : Preference {
 
-    private var colorWidget: ImageView? = null
-    private var currentColor: Int = Color.BLACK
-    private var availableColors: IntArray
+    @JvmOverloads
+    constructor(context: Context, attrs: AttributeSet? = null) : super(context, attrs) {
+        init(context.obtainStyledAttributes(attrs, R.styleable.PredefinedColorPickerPreference))
+    }
 
-    init {
-        val typedArray = context.obtainStyledAttributes(R.styleable.PredefinedColorPickerPreference)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+        init(context.obtainStyledAttributes(attrs, R.styleable.PredefinedColorPickerPreference, defStyleAttr, 0))
+    }
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
+        init(context.obtainStyledAttributes(attrs, R.styleable.PredefinedColorPickerPreference, defStyleAttr, defStyleRes))
+    }
+
+    private fun init(typedArray: TypedArray) {
         availableColors = context.resources.getIntArray(typedArray.getResourceId(R.styleable.PredefinedColorPickerPreference_colors, R.array.color_picker_default_colors))
         if (typedArray.getBoolean(R.styleable.PredefinedColorPickerPreference_pcpp_useSimpleSummaryProvider, false)) {
             summaryProvider = SUMMARY_PROVIDER
@@ -36,6 +40,10 @@ class PredefinedColorPickerPreference @JvmOverloads constructor(
         typedArray.recycle()
         widgetLayoutResource = R.layout.preference_widget_color_swatch
     }
+
+    private var colorWidget: ImageView? = null
+    private var currentColor: Int = Color.BLACK
+    private lateinit var availableColors: IntArray
 
     fun setAvailableColorsArrayRes(@ArrayRes arrayRes: Int) {
         availableColors = context.resources.getIntArray(arrayRes)

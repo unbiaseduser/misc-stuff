@@ -1,5 +1,6 @@
 package com.sixtyninefourtwenty.custompreferences
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.TypedArray
@@ -14,19 +15,27 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
-class TimePickerPreference @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = androidx.preference.R.attr.dialogPreferenceStyle,
-    defStyleRes: Int = 0
-) : AbstractCustomDialogPreference(context, attrs, defStyleAttr, defStyleRes) {
+@Suppress("unused")
+class TimePickerPreference : AbstractCustomDialogPreference {
 
-    init {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.TimePickerPreference, defStyleAttr, defStyleRes)
-        if (a.getBoolean(R.styleable.TimePickerPreference_tpp_useSimpleSummaryProvider, false)) {
+    @JvmOverloads
+    constructor(context: Context, attrs: AttributeSet? = null) : super(context, attrs) {
+        init(context.obtainStyledAttributes(attrs, R.styleable.TimePickerPreference))
+    }
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+        init(context.obtainStyledAttributes(attrs, R.styleable.TimePickerPreference, defStyleAttr, 0))
+    }
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
+        init(context.obtainStyledAttributes(attrs, R.styleable.TimePickerPreference, defStyleAttr, defStyleRes))
+    }
+
+    private fun init(typedArray: TypedArray) {
+        if (typedArray.getBoolean(R.styleable.TimePickerPreference_tpp_useSimpleSummaryProvider, false)) {
             summaryProvider = mySummaryProvider
         }
-        a.recycle()
+        typedArray.recycle()
     }
 
     var time: LocalTime? = null

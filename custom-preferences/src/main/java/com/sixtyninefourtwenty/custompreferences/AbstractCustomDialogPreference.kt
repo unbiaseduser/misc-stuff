@@ -7,12 +7,15 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.preference.DialogPreference
 
-abstract class AbstractCustomDialogPreference @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = androidx.preference.R.attr.dialogPreferenceStyle,
-    defStyleRes: Int = 0
-) : DialogPreference(context, attrs, defStyleAttr, defStyleRes) {
+@Suppress("unused")
+abstract class AbstractCustomDialogPreference : DialogPreference {
+
+    @JvmOverloads
+    constructor(context: Context, attrs: AttributeSet? = null) : super(context, attrs)
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
 
     protected abstract fun createDialog(): DialogFragment
 
