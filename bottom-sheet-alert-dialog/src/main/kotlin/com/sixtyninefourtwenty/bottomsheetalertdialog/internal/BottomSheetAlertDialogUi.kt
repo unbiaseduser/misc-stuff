@@ -31,6 +31,13 @@ sealed interface BottomSheetAlertDialogCommon {
         }
     }
 
+    fun setTitle(titleText: CharSequence) {
+        with(title) {
+            visibility = View.VISIBLE
+            text = titleText
+        }
+    }
+
     fun setContentView(view: View) {
         with(content) {
             removeAllViews()

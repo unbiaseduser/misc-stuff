@@ -19,6 +19,8 @@ sealed class BaseDialogBuilder<T : BaseDialogBuilder<T>>(view: View,
 
     fun setTitle(@StringRes titleRes: Int) = self().apply { ui.setTitle(titleRes) }
 
+    fun setTitle(titleText: CharSequence) = self().apply { ui.setTitle(titleText) }
+
     private fun applyBtnProps(whichButton: DialogButton, props: DialogButtonProperties) {
         ui.setButtonAppearance(whichButton, props)
         ui.getButton(whichButton).setOnClickListener {
