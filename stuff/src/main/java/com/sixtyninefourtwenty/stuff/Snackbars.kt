@@ -13,14 +13,10 @@ enum class SnackbarDuration(val androidInt: Int) {
     SHORT(BaseTransientBottomBar.LENGTH_SHORT),
     LONG(BaseTransientBottomBar.LENGTH_LONG),
     INDEFINITE(BaseTransientBottomBar.LENGTH_INDEFINITE);
-
-    internal companion object {
-        val VALUES = listOf(*values())
-    }
 }
 
 var Snackbar.durationAsEnum: SnackbarDuration
-    get() = SnackbarDuration.VALUES.first { it.androidInt == duration }
+    get() = SnackbarDuration.entries.first { it.androidInt == duration }
     set(value) { duration = value.androidInt }
 
 @JvmOverloads

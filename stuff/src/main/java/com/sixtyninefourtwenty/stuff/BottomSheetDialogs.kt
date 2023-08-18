@@ -19,10 +19,6 @@ enum class BottomSheetBehaviorState(val androidInt: Int) {
     SETTLING(BottomSheetBehavior.STATE_SETTLING),
     HIDDEN(BottomSheetBehavior.STATE_HIDDEN),
     HALF_EXPANDED(BottomSheetBehavior.STATE_HALF_EXPANDED);
-
-    internal companion object {
-        val VALUES = listOf(*values())
-    }
 }
 
 /**
@@ -35,5 +31,5 @@ enum class BottomSheetBehaviorState(val androidInt: Int) {
  * @see BottomSheetBehavior.setState
  */
 var BottomSheetBehavior<*>.stateAsEnum: BottomSheetBehaviorState
-    get() = BottomSheetBehaviorState.VALUES.first { it.androidInt == state }
+    get() = BottomSheetBehaviorState.entries.first { it.androidInt == state }
     set(value) { state = value.androidInt }

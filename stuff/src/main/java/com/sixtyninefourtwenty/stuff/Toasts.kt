@@ -9,14 +9,10 @@ import androidx.annotation.StringRes
 
 enum class ToastDuration(val androidInt: Int) {
     SHORT(Toast.LENGTH_SHORT), LONG(Toast.LENGTH_LONG);
-
-    internal companion object {
-        val VALUES = listOf(*values())
-    }
 }
 
 var Toast.durationAsEnum: ToastDuration
-    get() = ToastDuration.VALUES.first { it.androidInt == duration }
+    get() = ToastDuration.entries.first { it.androidInt == duration }
     set(value) { duration = value.androidInt }
 
 @JvmOverloads

@@ -21,14 +21,10 @@ var ImageView.drawableContent: Drawable?
 
 enum class ViewVisibility(val androidInt: Int) {
     VISIBLE(View.VISIBLE), INVISIBLE(View.INVISIBLE), GONE(View.GONE);
-
-    internal companion object {
-        val VALUES = listOf(*values())
-    }
 }
 
 var View.visibilityAsEnum: ViewVisibility
-    get() = ViewVisibility.VALUES.first { it.androidInt == visibility }
+    get() = ViewVisibility.entries.first { it.androidInt == visibility }
     set(value) { visibility = value.androidInt }
 
 @JvmOverloads
@@ -45,12 +41,8 @@ fun View.toggleVisibility(visibilityToToggleTo: ViewVisibility = ViewVisibility.
 
 enum class TabLayoutTabMode(val androidInt: Int) {
     FIXED(TabLayout.MODE_FIXED), SCROLLABLE(TabLayout.MODE_SCROLLABLE), AUTO(TabLayout.MODE_AUTO);
-
-    internal companion object {
-        val VALUES = listOf(*values())
-    }
 }
 
 var TabLayout.tabModeAsEnum: TabLayoutTabMode
-    get() = TabLayoutTabMode.VALUES.first { it.androidInt == tabMode }
+    get() = TabLayoutTabMode.entries.first { it.androidInt == tabMode }
     set(value) { tabMode = value.androidInt }
