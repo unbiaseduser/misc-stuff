@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Color
-import android.media.Image
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
@@ -13,6 +12,7 @@ import androidx.annotation.ArrayRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColorInt
 import androidx.preference.Preference
+import androidx.preference.Preference.SummaryProvider
 import androidx.preference.PreferenceViewHolder
 import com.github.dhaval2404.colorpicker.MaterialColorPickerDialog
 
@@ -21,29 +21,41 @@ class PredefinedColorPickerPreference : Preference {
 
     @JvmOverloads
     constructor(context: Context, attrs: AttributeSet? = null) : super(context, attrs) {
-        init(context.obtainStyledAttributes(attrs, R.styleable.PredefinedColorPickerPreference))
+        context.obtainStyledAttributes(attrs, R.styleable.PredefinedColorPickerPreference).use {
+            availableColors = initAvailableColors(it)
+            initSummaryProvider(it)
+        }
+        widgetLayoutResource = R.layout.preference_widget_color_swatch
     }
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init(context.obtainStyledAttributes(attrs, R.styleable.PredefinedColorPickerPreference, defStyleAttr, 0))
+        context.obtainStyledAttributes(attrs, R.styleable.PredefinedColorPickerPreference, defStyleAttr, 0).use {
+            availableColors = initAvailableColors(it)
+            initSummaryProvider(it)
+        }
+        widgetLayoutResource = R.layout.preference_widget_color_swatch
     }
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
-        init(context.obtainStyledAttributes(attrs, R.styleable.PredefinedColorPickerPreference, defStyleAttr, defStyleRes))
+        context.obtainStyledAttributes(attrs, R.styleable.PredefinedColorPickerPreference, defStyleAttr, defStyleRes).use {
+            availableColors = initAvailableColors(it)
+            initSummaryProvider(it)
+        }
+        widgetLayoutResource = R.layout.preference_widget_color_swatch
     }
 
-    private fun init(typedArray: TypedArray) {
-        availableColors = context.resources.getIntArray(typedArray.getResourceId(R.styleable.PredefinedColorPickerPreference_colors, R.array.color_picker_default_colors))
+    private fun initAvailableColors(typedArray: TypedArray) =
+        context.resources.getIntArray(typedArray.getResourceId(R.styleable.PredefinedColorPickerPreference_colors, R.array.color_picker_default_colors))
+
+    private fun initSummaryProvider(typedArray: TypedArray) {
         if (typedArray.getBoolean(R.styleable.PredefinedColorPickerPreference_pcpp_useSimpleSummaryProvider, false)) {
             summaryProvider = SUMMARY_PROVIDER
         }
-        typedArray.recycle()
-        widgetLayoutResource = R.layout.preference_widget_color_swatch
     }
 
     private var colorWidget: ImageView? = null
     private var currentColor: Int = Color.BLACK
-    private lateinit var availableColors: IntArray
+    private var availableColors: IntArray
 
     fun setAvailableColorsArrayRes(@ArrayRes arrayRes: Int) {
         availableColors = context.resources.getIntArray(arrayRes)
