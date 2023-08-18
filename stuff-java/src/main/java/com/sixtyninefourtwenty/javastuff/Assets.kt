@@ -8,6 +8,8 @@ import android.graphics.drawable.Drawable
 import java.nio.charset.Charset
 import java.util.stream.Stream
 
+fun AssetManager.openQuietly(path: String) = open(path)
+
 @JvmOverloads
 fun AssetManager.readEntireTextFile(path: String, charset: Charset = Charsets.UTF_8) =
     open(path).bufferedReader(charset).use { it.readText() }
