@@ -20,7 +20,13 @@ internal class ThemingPreferences(private val context: Context) : PreferenceData
         set(value) = putInt(PRIMARY_COLOR_KEY, value.getColorInt(context))
 
     var lightDarkMode: LightDarkMode
-        get() = LightDarkMode.values().first { it.getPrefValue(context) == getString(LIGHT_DARK_MODE_KEY, LightDarkMode.SYSTEM.getPrefValue(context)) }
+        get() = LightDarkMode.values().first { it.getPrefValue(context) == getString(LIGHT_DARK_MODE_KEY,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                LightDarkMode.SYSTEM.getPrefValue(context)
+            } else {
+                LightDarkMode.LIGHT.getPrefValue(context)
+            })
+        }
         set(value) = putString(LIGHT_DARK_MODE_KEY, value.getPrefValue(context))
 
     override fun putString(key: String?, value: String?) {
