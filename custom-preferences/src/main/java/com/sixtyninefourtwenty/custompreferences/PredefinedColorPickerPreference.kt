@@ -15,29 +15,33 @@ import androidx.preference.Preference
 import androidx.preference.Preference.SummaryProvider
 import androidx.preference.PreferenceViewHolder
 import com.github.dhaval2404.colorpicker.MaterialColorPickerDialog
+import com.sixtyninefourtwenty.custompreferences.internal.useCompat
 
 @Suppress("unused")
 class PredefinedColorPickerPreference : Preference {
 
+    @SuppressLint("Recycle")
     @JvmOverloads
     constructor(context: Context, attrs: AttributeSet? = null) : super(context, attrs) {
-        context.obtainStyledAttributes(attrs, R.styleable.PredefinedColorPickerPreference).use {
+        context.obtainStyledAttributes(attrs, R.styleable.PredefinedColorPickerPreference).useCompat {
             availableColors = initAvailableColors(it)
             initSummaryProvider(it)
         }
         widgetLayoutResource = R.layout.preference_widget_color_swatch
     }
 
+    @SuppressLint("Recycle")
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        context.obtainStyledAttributes(attrs, R.styleable.PredefinedColorPickerPreference, defStyleAttr, 0).use {
+        context.obtainStyledAttributes(attrs, R.styleable.PredefinedColorPickerPreference, defStyleAttr, 0).useCompat {
             availableColors = initAvailableColors(it)
             initSummaryProvider(it)
         }
         widgetLayoutResource = R.layout.preference_widget_color_swatch
     }
 
+    @SuppressLint("Recycle")
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
-        context.obtainStyledAttributes(attrs, R.styleable.PredefinedColorPickerPreference, defStyleAttr, defStyleRes).use {
+        context.obtainStyledAttributes(attrs, R.styleable.PredefinedColorPickerPreference, defStyleAttr, defStyleRes).useCompat {
             availableColors = initAvailableColors(it)
             initSummaryProvider(it)
         }
