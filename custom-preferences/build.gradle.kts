@@ -5,7 +5,7 @@ plugins {
 
 ext {
     set("artifact_id", "custom-preferences")
-    set("version_name", "1.0")
+    set("version_name", "1.0.1")
     set("description_str", "Custom preferences")
     set("is_android_library", true)
 }
