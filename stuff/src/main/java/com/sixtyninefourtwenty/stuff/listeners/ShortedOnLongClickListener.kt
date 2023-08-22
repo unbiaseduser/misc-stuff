@@ -5,12 +5,12 @@ import android.view.View
 @Suppress("unused")
 fun interface ShortedOnLongClickListener : View.OnLongClickListener {
 
-    override fun onLongClick(v: View?): Boolean {
-        onClickCustom()
+    override fun onLongClick(v: View): Boolean {
+        onClickCustom(v)
         return true
     }
 
-    fun onClickCustom()
+    fun onClickCustom(v: View)
 
     companion object {
         @JvmStatic
