@@ -16,11 +16,11 @@ internal class ThemingPreferences(private val context: Context) : PreferenceData
         set(value) = putBoolean(MD3_KEY, value)
 
     var themeColor: ThemeColor
-        get() = ThemeColor.values().first { it.getColorInt(context) == getInt(PRIMARY_COLOR_KEY, ThemeColor.BLUE.getColorInt(context)) }
+        get() = ThemeColor.entries.first { it.getColorInt(context) == getInt(PRIMARY_COLOR_KEY, ThemeColor.BLUE.getColorInt(context)) }
         set(value) = putInt(PRIMARY_COLOR_KEY, value.getColorInt(context))
 
     var lightDarkMode: LightDarkMode
-        get() = LightDarkMode.values().first { it.getPrefValue(context) == getString(LIGHT_DARK_MODE_KEY,
+        get() = LightDarkMode.entries.first { it.getPrefValue(context) == getString(LIGHT_DARK_MODE_KEY,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 LightDarkMode.SYSTEM.getPrefValue(context)
             } else {
