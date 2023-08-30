@@ -19,3 +19,12 @@ kotlin {
 java {
     withSourcesJar()
 }
+
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+}
+
+dependencies {
+    testImplementation(platform("org.junit:junit-bom:5.10.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+}
