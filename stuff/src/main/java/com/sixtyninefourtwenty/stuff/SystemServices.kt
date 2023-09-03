@@ -38,20 +38,13 @@ fun InputMethodManager.hideKeyboard(view: View) =
 val Context.alarmManager: AlarmManager
     get() = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-enum class AlarmManagerAlarmType(val androidInt: Int) {
-    RTC_WAKEUP(AlarmManager.RTC_WAKEUP),
-    RTC(AlarmManager.RTC),
-    ELAPSED_REALTIME_WAKEUP(AlarmManager.ELAPSED_REALTIME_WAKEUP),
-    ELAPSED_REALTIME(AlarmManager.ELAPSED_REALTIME)
-}
-
 @JvmOverloads
 fun AlarmManager.setRepeatingDaily(
-    type: AlarmManagerAlarmType = AlarmManagerAlarmType.RTC_WAKEUP,
+    type: Int = AlarmManager.RTC_WAKEUP,
     triggerAt: LocalTime,
     operation: PendingIntent
 ) = setRepeating(
-    type.androidInt,
+    type,
     ZonedDateTime.now().withHour(triggerAt.hour).withMinute(triggerAt.minute).toInstant().toEpochMilli(),
     Duration.ofDays(1).toMillis(),
     operation

@@ -9,24 +9,14 @@ import androidx.annotation.StringRes
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
-enum class SnackbarDuration(val androidInt: Int) {
-    SHORT(BaseTransientBottomBar.LENGTH_SHORT),
-    LONG(BaseTransientBottomBar.LENGTH_LONG),
-    INDEFINITE(BaseTransientBottomBar.LENGTH_INDEFINITE);
-}
-
-var Snackbar.durationAsEnum: SnackbarDuration
-    get() = SnackbarDuration.entries.first { it.androidInt == duration }
-    set(value) { duration = value.androidInt }
+@JvmOverloads
+fun View.makeSnackbar(text: CharSequence, duration: Int = BaseTransientBottomBar.LENGTH_SHORT) =
+    Snackbar.make(this, text, duration)
 
 @JvmOverloads
-fun View.makeSnackbar(text: CharSequence, duration: SnackbarDuration = SnackbarDuration.SHORT) =
-    Snackbar.make(this, text, duration.androidInt)
+fun View.makeSnackbar(@StringRes textRes: Int, duration: Int = BaseTransientBottomBar.LENGTH_SHORT) =
+    Snackbar.make(this, textRes, duration)
 
 @JvmOverloads
-fun View.makeSnackbar(@StringRes textRes: Int, duration: SnackbarDuration = SnackbarDuration.SHORT) =
-    Snackbar.make(this, textRes, duration.androidInt)
-
-@JvmOverloads
-fun View.makeSnackbar(context: Context, text: CharSequence, duration: SnackbarDuration = SnackbarDuration.SHORT) =
-    Snackbar.make(context, this, text, duration.androidInt)
+fun View.makeSnackbar(context: Context, text: CharSequence, duration: Int = BaseTransientBottomBar.LENGTH_SHORT) =
+    Snackbar.make(context, this, text, duration)

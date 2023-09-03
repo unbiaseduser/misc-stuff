@@ -7,18 +7,10 @@ import android.content.Context
 import android.widget.Toast
 import androidx.annotation.StringRes
 
-enum class ToastDuration(val androidInt: Int) {
-    SHORT(Toast.LENGTH_SHORT), LONG(Toast.LENGTH_LONG);
-}
-
-var Toast.durationAsEnum: ToastDuration
-    get() = ToastDuration.entries.first { it.androidInt == duration }
-    set(value) { duration = value.androidInt }
+@JvmOverloads
+fun Context.makeToast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT): Toast =
+    Toast.makeText(this, text, duration)
 
 @JvmOverloads
-fun Context.makeToast(text: CharSequence, duration: ToastDuration = ToastDuration.SHORT): Toast =
-    Toast.makeText(this, text, duration.androidInt)
-
-@JvmOverloads
-fun Context.makeToast(@StringRes textRes: Int, duration: ToastDuration = ToastDuration.SHORT): Toast =
-    Toast.makeText(this, textRes, duration.androidInt)
+fun Context.makeToast(@StringRes textRes: Int, duration: Int = Toast.LENGTH_SHORT): Toast =
+    Toast.makeText(this, textRes, duration)
