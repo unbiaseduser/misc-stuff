@@ -4,7 +4,6 @@
 package com.sixtyninefourtwenty.stuff
 
 import androidx.recyclerview.widget.ListAdapter
-import java.time.Duration
 import java.util.function.Consumer
 
 fun <T> ListAdapter<T, *>.copyOfCurrentList(): MutableList<T> = ArrayList(currentList)
